@@ -1,0 +1,99 @@
+﻿前端面试
+https://juejin.im/post/5e7af0685188255dcf4a497e?utm_source=gold_browser_extension#heading-23
+
+
+计算机原理
+https://juejin.im/post/5e51febde51d4526c932b390
+
+js运行机制
+https://juejin.im/post/5e22b391f265da3e204d8c14?utm_source=gold_browser_extension
+	(
+		js为什么是单线程?
+			与用途有关,js的主要用途是与用户互动,以及操作dom.
+			这决定了它只能是单线程,否则会带来很复杂的同步问题,浏览器可以按照顺序执行程序.
+			 **tips**
+				*js的worker线程,利用了多核cpu的计算能力,h5提出web worker标准,允许js脚本创建多个线程,并且子线程是完全受主线程控制的*
+		
+		
+		浏览器包含哪些进程?
+			Browser进程:
+				浏览器的主进程(负责协调、主控)，该进程只有一个
+				负责浏览器界面显示，与用户交互。如前进，后退等
+				负责各个页面的管理，创建和销毁其他进程
+				将渲染(Renderer)进程得到的内存中的Bitmap(位图)，绘制到用户界面上
+				网络资源的管理，下载等
+				
+			第三方插件进程:
+				每种类型的插件对应一个进程，当使用该插件时才创建
+				
+			GPU进程:
+				该进程也只有一个，用于3D绘制等等
+				
+			渲染进程(重):
+				即通常所说的浏览器内核(Renderer进程，内部是多线程)
+				每个Tab页面都有一个渲染进程，互不影响
+				主要作用为页面渲染，脚本执行，事件处理等
+				
+				主要的线程 {
+					GUI渲染线程(GUI线程和js引擎线程时互斥的.当js引擎线程空闲时,保存在队列中的gui更新被执行):渲染浏览器界面 => 解析html,css => 生成渲染树 => 布局和绘制
+					
+					JS引擎线程(js会阻塞gui渲染线程): js内核,解析js脚本并运行,浏览器同时只能有一个js引擎线程
+					
+					事假触发线程:属于浏览器进程,控制事件循环,并且管理一个事件队列(task queue)
+						
+					定时触发器线程:settimeout和setinterval
+					
+					异步http请求线程: 在XMLHttpRequest在连接后是通过浏览器新开一个线程请求
+
+				
+				}
+				
+			
+		
+		事件循环(event loop):同步任务都在主线程(这里的主线程就是JS引擎线程)上执行，会形成一个执行栈.主线程之外，事件触发线程管理着一个任务队列，只要异步任务有了运行结果，就在任务队列之中放一个事件回调,
+		一旦执行栈中的所有同步任务执行完毕(也就是JS引擎线程空闲了)，系统就会读取任务队列，将可运行的异步任务(任务队列中的事件回调，只要任务队列中有事件回调，就说明可以执行)添加到执行栈中，开始执行.
+		
+		宏任务和微任务(macrotask和microtask):{
+			宏任务:主代码块,setTimeout,setInterval,setImmediate ()-Node,requestAnimationFrame ()-浏览器;    每次执行栈执行的代码当做是一个宏任务.
+			微任务:process.nextTick ()-Node,Promise.then(),catch,finally,Object.observe,MutationObserver;    在当前宏任务执行后立即执行的任务.
+			
+		}
+
+		
+	)
+
+vue高阶组件
+https://juejin.im/post/5e8b5fa6f265da47ff7cc139?utm_source=gold_browser_extension#heading-9
+
+js面试基础
+https://juejin.im/post/5e8b261ae51d4546c0382ab4?utm_source=gold_browser_extension
+
+设计模式
+https://www.cnblogs.com/imwtr/p/9451129.html
+
+promise高阶实现
+https://juejin.im/post/5e3b9ae26fb9a07ca714a5cc
+
+前端面试
+https://juejin.im/post/5e7af0685188255dcf4a497e?utm_source=gold_browser_extension#heading-23
+
+
+断点续传
+https://juejin.im/post/5dff8a26e51d4558105420ed
+
+数据结构概念
+https://blog.csdn.net/qq_31196849/article/details/78529724
+
+
+|| 和 &&
+
+|| : 当一个条件为true时，后面的条件不再判断;当数值参与逻辑或运算时，结果为true，会返回第一个为真的值；如果结果为false，会返回第二个为假的值；
+
+&& : 当第一个条件为false时，就不再判断后面的条件;当数值参与逻辑与运算时，结果为true，那么会返回的会是第二个为真的值；如果结果为false，返回的会是第一个为假的值。
+
+
+
+
+
+
+
